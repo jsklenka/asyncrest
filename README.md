@@ -9,3 +9,4 @@ The other two examples use CompletableFuture class, which allows for asynchronou
 
 We could choose to use the completableFuture class directly (Test titled RunRestAsAsync) or create a wrapper class (Test titled ParallelRestClassTest)
 
+We will also want to have a wrapper class for the second issue of debugging information. We could add the interceptor logic as a part of the wrapper class so that we don't need to worry about it when making each individual web call.
