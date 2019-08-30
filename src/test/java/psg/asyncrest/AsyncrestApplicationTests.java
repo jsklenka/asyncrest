@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import psg.asyncrest.models.AdvancedRestTemplate;
 import psg.asyncrest.models.ParallelRest;
 import reactor.core.publisher.Mono;
 
@@ -99,6 +100,8 @@ public class AsyncrestApplicationTests {
         logger.info("rest call: " + response + " completed");
         return response;
     }
+
+
 
     @Test
     public void ParallelWebClientTest() throws ExecutionException, InterruptedException {
