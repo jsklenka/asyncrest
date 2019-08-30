@@ -93,9 +93,38 @@ public class AsyncrestApplicationTests {
         Assert.isTrue(cf2.isDone());
     }
 
+    @Test()
+    public  void RunRestAsAsyncBuiltIn() throws ExecutionException, InterruptedException {
+
+
+        String todo1Url = apiEndPointTemplate + '1';
+        String todo2Url = apiEndPointTemplate + '2';
+
+        AdvancedRestTemplate rt = new AdvancedRestTemplate();
+
+        CompletableFuture<String> cf1 = rt.GetForObjectAsync(todo1Url, String.class);
+
+        CompletableFuture<String> cf2 = rt.GetForObjectAsync(todo2Url, String.class);
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Assert.isTrue(cf1.isDone());
+        Assert.isTrue(cf2.isDone());
+    }
 
     public String MakeRestCall(String url){
         RestTemplate rt = new RestTemplateBuilder().build();
+        String response = rt.getForObject(url, String.class);
+        logger.info("rest call: " + response + " completed");
+        return response;
+    }
+
+    public String MakeRestCallAsync(String url){
+        AdvancedRestTemplate rt = new AdvancedRestTemplate();
         String response = rt.getForObject(url, String.class);
         logger.info("rest call: " + response + " completed");
         return response;

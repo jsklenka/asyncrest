@@ -20,4 +20,22 @@ public class AdvancedRestTemplate extends RestTemplate {
         this.setInterceptors(Collections.singletonList(new LoggingInterceptor()));
     }
 
+    public <T> CompletableFuture<T> GetForObjectAsync(String url, Class<T> responseType){
+
+        ExecuteRest<T> actionToPerform = () -> this.getForObject(url, responseType);
+
+        CompletableFuture<T> cf1 = CompletableFuture.supplyAsync(new Supplier<T>() {
+
+            @Override
+            public T get() {
+                return actionToPerform.execute();
+            }
+
+        });
+
+        return cf1;
+    }
+
+
+
 }
